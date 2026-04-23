@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NewsApp_JetpackCompose</string>
+    <string name="search">Search…</string>
+    <string name="news_catcher">News Catcher</string>
+    <string name="read_more">Read More…</string>
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+    <string name="language_english">English</string>
+    <string name="language_azerbaijani">Azerbaijani</string>
+    <string name="language_turkish">Turkish</string>
+    <string name="language_russian">Russian</string>
+</resources>

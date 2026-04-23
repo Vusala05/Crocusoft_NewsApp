@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApp_JetpackCompose</string>
+    <string name="search">Поиск…</string>
+    <string name="news_catcher">Ловец новостей</string>
+    <string name="read_more">Читать далее…</string>
+    <string name="save">Сохранить</string>
+    <string name="share">Поделиться</string>
+    <string name="language_english">Английский</string>
+    <string name="language_azerbaijani">Азербайджанский</string>
+    <string name="language_turkish">Турецкий</string>
+    <string name="language_russian">Русский</string>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApp_JetpackCompose</string>
+    <string name="search">Ara…</string>
+    <string name="news_catcher">Haber Yakalayıcı</string>
+    <string name="read_more">Devamını oku…</string>
+    <string name="save">Kaydet</string>
+    <string name="share">Paylaş</string>
+    <string name="language_english">İngilizce</string>
+    <string name="language_azerbaijani">Azerbaycanca</string>
+    <string name="language_turkish">Türkce</string>
+    <string name="language_russian">Rusca</string>
+</resources>

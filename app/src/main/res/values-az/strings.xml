@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NewsApp_JetpackCompose</string>
+    <string name="search">Axtar…</string>
+    <string name="news_catcher">Xəbər Tutucu</string>
+    <string name="read_more">Daha çox oxu…</string>
+    <string name="save">Yadda saxla</string>
+    <string name="share">Paylaş</string>
+    <string name="language_english">İngilis dili</string>
+    <string name="language_azerbaijani">Azərbaycan dili</string>
+    <string name="language_turkish">Türk dili</string>
+    <string name="language_russian">Rus dili</string>
+</resources>
