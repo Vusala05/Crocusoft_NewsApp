@@ -72,7 +72,7 @@ fun NewsItemCard(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 AppCapsule(
-                    modifier = Modifier.align(Alignment.Start),
+                    outerModifier = Modifier.align(Alignment.Start),
                     onClick = {},
                     content = {
                         Text(

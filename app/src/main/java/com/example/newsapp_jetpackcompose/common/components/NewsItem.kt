@@ -42,11 +42,11 @@ fun NewsItem(
             .background(Color.Transparent)
             .padding(BaseTheme.dimens.PaddingMedium),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(BaseTheme.dimens.PaddingMedium)
     ) {
         Column(
             modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(BaseTheme.dimens.PaddingTiny)
         ) {
             AppCapsule(
                 onClick = {},
@@ -81,8 +81,7 @@ fun NewsItem(
                     text = newsUiModel.author,
                     style = BaseTheme.textStyle.t12Bold,
                     color = colors.primaryText,
-                   // maxLines = 1,
-                    //overflow = TextOverflow.Ellipsis
+
                 )
             }
         }
@@ -99,11 +98,3 @@ fun NewsItem(
         )
     }
 }
-/*
-@Preview
-@Composable
-fun SimpleComposablePrevieww() {
-    NewsApp_JetpackComposeTheme {
-        NewsItem(newsUiModel = NewsUiModel.mock, onClick = {})
-    }
-}*/

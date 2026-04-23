@@ -48,8 +48,9 @@ fun LanguageContent(
         modifier = Modifier.padding(top = BaseTheme.dimens.PaddingSmall),
         topBar = {
             AppCapsule(
-                modifier = Modifier.size(BaseTheme.dimens.navigation, BaseTheme.dimens.detailBackActionHeight)
-                    .padding(end = BaseTheme.dimens.PaddingSmall),
+                innerModifier = Modifier.padding(end = BaseTheme.dimens.PaddingLarge ),
+                outerModifier = Modifier.size(BaseTheme.dimens.navigation, BaseTheme.dimens.detailBackActionHeight)
+                    .padding(horizontal = BaseTheme.dimens.PaddingMedium),
                 onClick = onNavigateBack
             ) {
                 Icon(

@@ -32,7 +32,7 @@ fun DetailPart(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = colors.background, shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)),
+            .background(color = colors.background, shape = RoundedCornerShape(topStart = BaseTheme.dimens.detailCardRadius, topEnd = BaseTheme.dimens.detailCardRadius)),
              contentAlignment = Alignment.TopCenter
     ){
 
@@ -44,7 +44,7 @@ fun DetailPart(
             verticalArrangement = Arrangement.spacedBy(BaseTheme.dimens.PaddingLarge),
             ) {
             AppCapsule(
-                modifier = Modifier.align(Alignment.Start),
+                outerModifier = Modifier.align(Alignment.Start),
               onClick = {},
                 content = {
                     Text(text = "Finance", style = BaseTheme.textStyle.t11, color = colors.primaryText)
@@ -60,10 +60,6 @@ fun DetailPart(
                 modifier = Modifier.align(Alignment.End),
                 style = BaseTheme.textStyle.t12Bold,
                 color = colors.readMoreColor)
-
-
-
-
 
         }
 

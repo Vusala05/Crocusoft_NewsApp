@@ -43,13 +43,6 @@ class HomeViewModel @Inject constructor(
 
     fun onIntent(intent : HomeContract.Intent){
      when(intent){
-         is HomeContract.Intent.OnNewsClick -> {
-
-
-         }
-         is HomeContract.Intent.OnLanguageSwitch -> {
-
-         }
          is HomeContract.Intent.OnSearchQueryChange -> {
              _state.update { it.copy(searchQuery = intent.query) }
              searchJob?.cancel()
@@ -57,7 +50,7 @@ class HomeViewModel @Inject constructor(
                  searchJob = viewModelScope.launch {
                      delay(500L)
                      _state.update { it.copy(isLoading = true) }
-                     searchMovie(intent.query)
+                     searchNews(intent.query)
                      _state.update { it.copy(isLoading = false) }
 
                  }
@@ -74,54 +67,48 @@ class HomeViewModel @Inject constructor(
 
     }
 
-    private fun fetchTopHeadlines(){
+    private fun getNewsList(useCase : suspend () -> ContentState<List<NewsUiModel>>,
+                            onResponse : (List<NewsUiModel>) -> Unit) {
         viewModelScope.launch {
-            when (val res = fetchHeadlinesNewsUseCase()) {
+            when (val res = useCase.invoke()) {
                 is ContentState.Error<*> -> {
-                    _effect.emit(HomeContract.Effect.ShowError("headlines news gelmir"))
-                }
+                    Log.e("ERRORRR", res.message)
 
-                is ContentState.Success<List<NewsUiModel>> -> {
-                    _state.update {
-                        it.copy(topHeadlinesNews = res.data)
-                    }
-                    cacheRepository.setNewsList(res.data)
-                }
-            }
-        }
-    }
-    private fun fetchWorldNews(){
-        viewModelScope.launch {
-            when (val res = fetchWorldNewsUseCase()) {
-                is ContentState.Error<*> -> {
                     _effect.emit(HomeContract.Effect.ShowError(res.message))
                 }
 
                 is ContentState.Success<List<NewsUiModel>> -> {
-                    cachedNews.update { res.data }
-                    _state.update {
-                        it.copy(worldNews = res.data)
-                    }
-                    cacheRepository.setNewsList(res.data)
-                }
-            }
-        }
-    }
-    private suspend fun searchMovie(query: String) {
-        if (query.isBlank()) return
-        when (val res = searchNewsUseCase(query)) {
-            is ContentState.Error -> {
-                _effect.emit(HomeContract.Effect.ShowError(res.message))
-                _state.update { it.copy(worldNews = emptyList()) }
-            }
-
-            is ContentState.Success<List<NewsUiModel>> -> {
-                _state.update {
-                    cacheRepository.setNewsList(res.data)
-                    it.copy(worldNews = res.data)
+                    onResponse(res.data)
                 }
             }
         }
     }
 
-}
+        private fun fetchTopHeadlines() {
+            getNewsList(useCase = {fetchHeadlinesNewsUseCase()}) { topHeadlinesNews ->
+                _state.update { it.copy(topHeadlinesNews = topHeadlinesNews) }
+                cacheRepository.setNewsList(topHeadlinesNews)
+                Log.e("TOP",topHeadlinesNews.size.toString())
+
+            }
+
+        }
+
+        private fun fetchWorldNews() {
+            getNewsList(useCase = {fetchWorldNewsUseCase()}) { worldNews ->
+                _state.update { it.copy(worldNews = worldNews) }
+                 cachedNews.update { worldNews }
+                cacheRepository.setNewsList(worldNews)
+
+            }
+        }
+
+        private fun searchNews(query: String) {
+            getNewsList(useCase = {searchNewsUseCase(query)}) { searchedNews ->
+                _state.update { it.copy(worldNews = searchedNews) }
+                cacheRepository.setNewsList(searchedNews)
+
+            }
+        }
+
+    }

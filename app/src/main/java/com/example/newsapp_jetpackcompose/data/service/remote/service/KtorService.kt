@@ -17,13 +17,6 @@ class KtorService @Inject constructor(
         }.body()
     }
 
-    override suspend fun fetchWorldNews(): NewsResponseModel {
-        return httpClient.get(ApiConstants.SEARCH_NEWS){
-            parameter("q", "world")
-            parameter("sortBy","popularity")
-            parameter("page", 1)
-        }.body()
-    }
 
     override suspend fun searchNews(q: String): NewsResponseModel {
         return httpClient.get(ApiConstants.SEARCH_NEWS){

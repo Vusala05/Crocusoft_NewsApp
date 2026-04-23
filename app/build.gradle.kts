@@ -37,7 +37,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
+        isCoreLibraryDesugaringEnabled = true    }
 
     buildFeatures {
         compose = true
@@ -97,4 +97,6 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }

@@ -20,18 +20,19 @@ import com.example.newsapp_jetpackcompose.ui.theme.NewsApp_JetpackComposeTheme
 
 @Composable
 fun AppCapsule(
-    modifier                                       : Modifier = Modifier,
+    outerModifier : Modifier = Modifier,
+    innerModifier : Modifier = Modifier,
     onClick : () -> Unit,
     content : @Composable RowScope.()->Unit
 ){
    val colors = LocalColors.current
     Surface(
-        modifier = modifier,
+        modifier = outerModifier,
         color = colors.secondary,
         shape = CircleShape
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = BaseTheme.dimens.PaddingSmall, vertical = BaseTheme.dimens.PaddingMicro)
+            modifier = innerModifier.padding(horizontal = BaseTheme.dimens.PaddingSmall, vertical = BaseTheme.dimens.PaddingMicro)
                 .clickable(onClick = onClick),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,

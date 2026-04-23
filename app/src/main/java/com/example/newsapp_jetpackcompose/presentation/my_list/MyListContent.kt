@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.newsapp_jetpackcompose.common.components.NewsItem
 import com.example.newsapp_jetpackcompose.core.BaseTheme
 import com.example.newsapp_jetpackcompose.core.Strings
+import com.example.newsapp_jetpackcompose.core.utils.DateUtil
 import com.example.newsapp_jetpackcompose.ui.theme.LocalColors
 
 @Composable
@@ -56,8 +57,8 @@ fun MyListContent(
                 }
 
                 Text(
-                    text = "March 26th, 2022",
-                    modifier = Modifier.padding(top = 8.dp),
+                    text = DateUtil.getCurrentFormattedDate(),
+                    modifier = Modifier.padding(top = BaseTheme.dimens.PaddingMedium),
                     style = BaseTheme.textStyle.t12,
                     color = colors.secondaryText
                 )

@@ -14,8 +14,6 @@ object HomeContract {
 
         sealed class Intent {
             data class OnSearchQueryChange(val query: String) : Intent()
-            data class OnNewsClick(val url : String) : Intent()
-            object OnLanguageSwitch : Intent()
         }
 
         sealed class Effect {

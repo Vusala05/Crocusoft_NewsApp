@@ -18,10 +18,6 @@ class HomeRepositoryImpl @Inject constructor(val apiService: ApiService) : HomeR
         return safeApiCall { apiService.fetchTopHeadlines() }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override suspend fun fetchWorldNews(): ContentState<List<NewsUiModel>> {
-        return safeApiCall { apiService.fetchWorldNews() }
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override suspend fun searchNews(q: String): ContentState<List<NewsUiModel>> {

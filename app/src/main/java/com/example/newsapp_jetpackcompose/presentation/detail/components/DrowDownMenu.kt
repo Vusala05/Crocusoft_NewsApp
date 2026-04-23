@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -42,6 +43,7 @@ fun DropDownMenu(
         modifier = Modifier
             .background(colors.background, shape = RoundedCornerShape(BaseTheme.dimens.PaddingMedium))
             .width(BaseTheme.dimens.settingsCardWidth)
+            .clip(shape = RoundedCornerShape(BaseTheme.dimens.PaddingMedium))
 
     ) {
         DropdownMenuItem(
@@ -63,11 +65,12 @@ fun DropDownMenu(
         DropdownMenuItem(
             text = { Text("Share", style = BaseTheme.textStyle.t16Bold) },
             leadingIcon = {
-                Icon(painter = painterResource(Drawables.share), contentDescription = null, tint = Color.Blue,
+                Icon(painter = painterResource(Drawables.share),
+                    contentDescription = null,
+                    tint = colors.primaryText,
                     modifier = Modifier.size(BaseTheme.dimens.settingsBtn))
             },
             onClick = {
-                onDismiss()
             }
         )
 

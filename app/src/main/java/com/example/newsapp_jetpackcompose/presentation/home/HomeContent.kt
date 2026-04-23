@@ -1,7 +1,5 @@
 package com.example.newsapp_jetpackcompose.presentation.home
 
-import android.R
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -21,16 +19,10 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,6 +35,7 @@ import com.example.newsapp_jetpackcompose.common.components.NewsItem
 import com.example.newsapp_jetpackcompose.core.BaseTheme
 import com.example.newsapp_jetpackcompose.core.Drawables
 import com.example.newsapp_jetpackcompose.core.Strings
+import com.example.newsapp_jetpackcompose.core.utils.DateUtil
 import com.example.newsapp_jetpackcompose.presentation.home.components.AppSearchBar
 import com.example.newsapp_jetpackcompose.presentation.home.components.NewsItemCard
 import com.example.newsapp_jetpackcompose.ui.theme.LocalColors
@@ -59,7 +52,6 @@ fun HomeContent(
 ) {
     val colors = LocalColors.current
     val context = LocalContext.current
-    //var searchText by remember { mutableStateOf("") }
     val pagerState = rememberPagerState(pageCount = { state.topHeadlinesNews.size })
 
     LaunchedEffect(effect) {
@@ -74,6 +66,7 @@ fun HomeContent(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
+        containerColor = colors.background,
         topBar = {
             Row(
                 modifier = Modifier
@@ -105,7 +98,7 @@ fun HomeContent(
 
             item {
                 Text(
-                    text = "March 26th, 2022",
+                    text = DateUtil.getCurrentFormattedDate(),
                     style = BaseTheme.textStyle.t13,
                     color = colors.secondaryText
                 )
@@ -122,7 +115,6 @@ fun HomeContent(
                 ) { page ->
                     val news = state.topHeadlinesNews[page]
                     NewsItemCard(news = news, onClick = {
-                        postIntent(HomeContract.Intent.OnNewsClick(news.url))
                         onNavigateDetail(news.url)
                     })
                 }
@@ -157,7 +149,8 @@ fun HomeContent(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     AppCapsule(
-                        onClick = {},
+                        outerModifier = Modifier.size(BaseTheme.dimens.actionBthWidth, BaseTheme.dimens.actionBthHeight),
+                        onClick = onNavigateLanguage,
                         content = {
                             Text(
                                 text = "EN",
@@ -165,16 +158,14 @@ fun HomeContent(
                                 color = colors.primaryText
                             )
                             Spacer(modifier = Modifier.width(BaseTheme.dimens.PaddingLarge))
-                            IconButton(
-                                onClick = onNavigateLanguage
-                            ) {
+
                                 androidx.compose.material3.Icon(
                                     painter = painterResource(Drawables.check),
                                     contentDescription = null,
                                     modifier = Modifier.size(BaseTheme.dimens.iconAction),
                                     tint = colors.onSecondary
                                 )
-                            }
+
                         }
                     )
                 }
@@ -200,7 +191,6 @@ fun HomeContent(
                     NewsItem(
                         newsUiModel = news,
                         onClick = {
-                            postIntent(HomeContract.Intent.OnNewsClick(news.url))
                             onNavigateDetail(news.url)
                         }
                     )

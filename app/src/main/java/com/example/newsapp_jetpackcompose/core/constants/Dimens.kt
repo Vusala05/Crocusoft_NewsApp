@@ -11,6 +11,7 @@ object Dimens {
     val searchbarHeight = 40.dp
     val navigationHeight = 60.dp
     val searchbarWidth = 306.dp
+    val detailCardRadius = 32.dp
     val cardHeight = 17.dp
     val cardWidth = 76.dp
     val backCardHeight = 30.dp

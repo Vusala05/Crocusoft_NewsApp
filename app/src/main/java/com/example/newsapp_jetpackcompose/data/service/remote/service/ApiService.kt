@@ -6,7 +6,7 @@ interface ApiService {
 
     suspend fun fetchTopHeadlines() : NewsResponseModel
 
-    suspend fun fetchWorldNews() : NewsResponseModel
+    //suspend fun fetchWorldNews() : NewsResponseModel
 
     suspend fun searchNews(q : String) : NewsResponseModel
 }

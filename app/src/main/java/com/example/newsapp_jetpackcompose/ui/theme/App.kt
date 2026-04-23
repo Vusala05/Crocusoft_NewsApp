@@ -23,7 +23,6 @@ import com.example.newsapp_jetpackcompose.core.BaseTheme
 import com.example.newsapp_jetpackcompose.core.BottomSheetNavigation
 import com.example.newsapp_jetpackcompose.ui.navigation.AppRoutes
 import com.example.newsapp_jetpackcompose.ui.navigation.MainRoutes
-import kotlin.math.log
 
 @Composable
 fun App() {

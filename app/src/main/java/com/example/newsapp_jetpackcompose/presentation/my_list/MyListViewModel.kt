@@ -30,11 +30,9 @@ init {
     fun getToggledNews(){
         viewModelScope.launch {
             fetchBookMarkedNewsUseCase().collect { news->
-
-                        _state.update { it.copy(bookMarkedList = news)
+                _state.update { it.copy(bookMarkedList = news)
                         }
-
-                    }
+            }
                 }
             }
         }

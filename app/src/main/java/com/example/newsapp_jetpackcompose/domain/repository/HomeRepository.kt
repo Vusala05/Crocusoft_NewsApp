@@ -7,7 +7,7 @@ interface HomeRepository {
 
     suspend fun fetchTopHeadlines() : ContentState<List<NewsUiModel>>
 
-    suspend fun fetchWorldNews () : ContentState<List<NewsUiModel>>
+    //suspend fun fetchWorldNews () : ContentState<List<NewsUiModel>>
 
     suspend fun searchNews(q : String) : ContentState<List<NewsUiModel>>
 }

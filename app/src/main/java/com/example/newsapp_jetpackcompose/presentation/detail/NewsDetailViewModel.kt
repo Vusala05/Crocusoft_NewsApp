@@ -3,9 +3,13 @@ package com.example.newsapp_jetpackcompose.presentation.detail
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newsapp_jetpackcompose.core.ContentState
+import com.example.newsapp_jetpackcompose.core.constants.AppErrors
 import com.example.newsapp_jetpackcompose.domain.repository.CacheRepository
 import com.example.newsapp_jetpackcompose.domain.uimodel.NewsUiModel
+import com.example.newsapp_jetpackcompose.domain.usecases.AddCachedNewsUseCase
 import com.example.newsapp_jetpackcompose.domain.usecases.CheckBookmarkedStatusUseCase
+import com.example.newsapp_jetpackcompose.domain.usecases.FetchedCachedNewsUseCase
 import com.example.newsapp_jetpackcompose.domain.usecases.ToggleBookmarkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsDetailViewModel @Inject constructor(
-    val cacheRepository: CacheRepository,
+    val fetchedCachedNewsUseCase: FetchedCachedNewsUseCase,
     val checkBookmarkedStatusUseCase: CheckBookmarkedStatusUseCase,
     val toggleBookmarkUseCase: ToggleBookmarkUseCase
 ) : ViewModel() {
@@ -33,30 +37,29 @@ class NewsDetailViewModel @Inject constructor(
      fun onIntent(intent : NewsDetailContract.Intent){
         when(intent){
             is NewsDetailContract.Intent.LoadSelectedNewsData ->{
-               val selectedNews = cacheRepository.getNewsList(intent.url)
-                if(selectedNews!=null){
-                    _state.update { it.copy(selectedNews = selectedNews ) }
-                }
-                 else{
-                    Log.e("url bosdur : ", "bossssssdurrrr")
-                }
+             loadNewsDetail(intent.url)
                 toggleStatusCheck(intent.url)
             }
-            is NewsDetailContract.Intent.ClickReadMore ->{
 
-            }
-            is NewsDetailContract.Intent.ToggleSettings ->{
-
-            }
             is NewsDetailContract.Intent.ToggleSaveBtn ->{
                 toggleBookmark(intent.news)
+            }
+        }
+    }
+
+    private fun loadNewsDetail(url:String){
+        when(val res = fetchedCachedNewsUseCase(url)){
+            is ContentState.Success ->{
+                _state.update { it.copy(selectedNews = res.data) }
+            }
+            is ContentState.Error ->{
+                NewsDetailContract.Effect.ShowError(res.message)
             }
         }
     }
     private fun toggleStatusCheck(url : String){
         viewModelScope.launch {
             checkBookmarkedStatusUseCase(url).collect { isBookmarked ->
-                Log.e("isBookMarked","$isBookmarked")
                 _state.update { it.copy(isBookmarked = isBookmarked)}
             }
         }
@@ -65,8 +68,6 @@ class NewsDetailViewModel @Inject constructor(
     private fun toggleBookmark(news : NewsUiModel){
         viewModelScope.launch {
             val currentSate = _state.value
-            Log.e("news","${news.url}, ${news.author}")
-            Log.e("status","${currentSate.isBookmarked}")
             toggleBookmarkUseCase(news = news, isBookmarked = currentSate.isBookmarked)
         }
     }

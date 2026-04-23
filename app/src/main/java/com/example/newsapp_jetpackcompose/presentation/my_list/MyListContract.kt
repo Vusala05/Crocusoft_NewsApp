@@ -4,12 +4,8 @@ import com.example.newsapp_jetpackcompose.domain.uimodel.NewsUiModel
 
 object MyListContract {
 
-    sealed interface Intent{
-
-    }
-
     sealed interface Effect {
-
+        data class ShowError(val message : String)
     }
 
     data class State(

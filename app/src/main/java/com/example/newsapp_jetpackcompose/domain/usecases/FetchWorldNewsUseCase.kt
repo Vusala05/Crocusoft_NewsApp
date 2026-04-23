@@ -8,6 +8,6 @@ import javax.inject.Inject
 class FetchWorldNewsUseCase @Inject constructor(val homeRepository: HomeRepository) {
 
     suspend operator fun invoke() : ContentState<List<NewsUiModel>>{
-        return homeRepository.fetchWorldNews()
+        return homeRepository.searchNews("world")
     }
 }
