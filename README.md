@@ -8,7 +8,7 @@ A modern News application that provides a seamless reading experience with multi
 * **Architecture:** MVI + Clean Architecture
 * **Local Database:** Room
 * **Preferences:** Jetpack DataStore
-* **Localization:** Multi-Language Support (LocaleManager & Dynamic switching)
+* **Localization:** Multi-Language Support (LocaleManager)
 * **Networking:** Retrofit & OkHttp
 * **DI:** Hilt
 * **Async:** Coroutines & Flow
